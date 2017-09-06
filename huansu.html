@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			img {
+				width: 80px;
+				position: absolute;
+				left: 20px;
+				top: 400px;
+				border-radius: 50%;
+			}
+			
+			body {
+				padding: 0;
+				margin: 0;
+				background-color:peru;
+			}
+		</style>
+	</head>
+
+	<body>
+		<img src="images/a9.jpg" alt="" />
+		<script>
+			var img = document.querySelector("img");
+			var speedX = 60;		//初始值
+			var speedY = -50;		//初始值，负数向上
+			var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+			var timer = setInterval(function() {
+				speedY += 5;
+				if(img.offsetTop >= clientHeight - img.offsetHeight) {	//设置边界
+					img.offsetTop = clientHeight - img.offsetHeight + "px";
+					speedY *= -0.66;			//控制 方向和速度大小，逐渐变小
+					speedY = parseInt(speedY);
+					if(speedY == -2) {			//取一个临界点停止
+						clearInterval(timer)
+					}
+
+				}
+		
+				img.style.top = img.offsetTop + speedY + "px";
+
+			}, 50)
+
+			var timer2 = setInterval(function() {
+				speedX -= 2;
+				if(speedX <= 0) {
+					clearInterval(timer2)
+				}
+				img.style.left = img.offsetLeft + speedX + "px";
+			}, 80)
+		</script>
+
+	</body>
+
+</html>
