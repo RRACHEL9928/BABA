@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,html{
+				padding:0;
+				margin:0;
+			}
+			body{
+				background: url(img/q2.jpg) no-repeat;
+			}
+			/*#people{
+				width:390px;
+				position: absolute;
+				top:-80px;
+				left:188px;
+			}*/
+			#ren{
+				position: absolute;
+				width:263px;
+				top:85px;
+				left:188px;
+			}
+			li{
+				list-style: none;
+			}
+			a{
+				text-decoration: none;
+			}
+			.yi li img{
+				position: absolute;
+				top:326px;
+				left:2px;
+				width:634px;
+				display:none;
+			}
+			.huan{
+				position: absolute;
+				top:100px;
+				right:170px;
+				width:360px;
+				height:655px;
+				background-color:#ff433e;
+				border: 2px solid #9b0000;
+				border-radius: 30px;
+				overflow: hidden;
+			}
+			.huan ul{
+				position: absolute;
+				top:40px;
+				left:13px;
+				width:290px;
+				height:510px;
+				border: 2px solid #9b0000;
+				background-color: #ffcccb;
+			}
+			.huan a{
+				z-index: 20;
+				width:120px;
+				height:56px;
+				display:inline-block;
+				border: 2px solid #9b0000;
+				border-radius:8px;
+				position: absolute;
+				bottom:15px;
+				font:20px/56px "幼圆";
+				font-weight: 700;
+				color:#ffffc9;
+				text-align: center;	
+				background-color: #ff6562;
+			}
+			.huan a#left{
+				left:48px;
+			}
+			.huan a#right{
+				right:48px;
+			}
+			.huan li img{
+				position: absolute;
+				left:-160px;
+				top:0px;
+				width:660px;
+				height:524px;
+				display:none;
+				cursor:pointer;
+			}
+			.share{
+				position: absolute;
+				top:460px;
+				left:-155px;
+				width:150px;
+				height:220px;
+				background-color: #FF433E;
+				opacity: .5;
+				border: 2px solid #9b0000;
+				
+			}
+			.share img.money{
+				position: absolute;
+				left:10px;
+				top:10px;
+				width:130px;
+				height:120px;
+			}
+			.share p{
+				color:#ffffc9;
+				font:20px/24px "幼圆";
+				font-weight: 700;
+				position: absolute;
+				bottom:45px;
+				left:30px;
+			}
+			.share .ss1{
+				position: absolute;
+				right:-27px;
+				top:68px;
+				width:22px;
+				height:70px;
+				border: 2px solid #9b0000;
+				font:16px/20px "幼圆";
+				color:white;
+			}
+			.share .pyq{
+				position: absolute;
+				left:30px;
+				width:30px;
+				height:30px;
+				display:block;
+				bottom:18px;
+				margin-left:15px;
+			}
+	
+	
+		</style>
+	</head>
+	<body>
+		<img src="img/toufa.png" id="ren"/>
+		<ul class="yi">
+			<li><img src="img/q3.png" alt="" style="display: block"/></li>
+			<li><img src="img/q2.png" alt="" /></li>
+			<li><img src="img/q4.png" alt="" /></li>
+			<li><img src="img/q5.png" alt="" /></li>
+		</ul>
+		<div class="huan">
+			<a href="javescript:;" id="left">上一页</a>
+			<a href="javescript:;" id="right">下一页</a>
+			<ul>
+				<li><img src="img/q3.png" alt="" title="0" style="display: block"/></li>
+				<li><img src="img/q2.png" alt="" title="1"/></li>
+				<li><img src="img/q4.png" alt="" title="2"/></li>
+				<li><img src="img/q5.png" alt="" title="3"/></li>
+			</ul>
+		</div>
+		<div class="share">
+			<img src="img/money.png" alt="" class="money"/>
+			<p>打赏作者</p>
+			<div class="ss1">分享到</div>
+			<img src="img/pp.png" alt="" class="pyq"/>
+			<img src="img/pp.png" alt="" class="pyq"/>
+		</div>
+		<script>
+			//获取元素，衣柜里的衣服，按钮
+			var Hyi = document.querySelectorAll(".huan ul li img");
+			var Pyi = document.querySelectorAll(".yi li img");
+			var aA = document.querySelectorAll(".huan a");
+			var share = document.querySelector(".share");
+			var num=0;
+			//下一页按钮。利用NUM控制衣服的索引。
+			aA[1].onclick = function(){
+				num++;
+				if(num>=4){
+					num=0;
+				}
+				for(var i=0;i<Hyi.length;i++){
+					Hyi[i].style.display = "none";
+				}
+				Hyi[num].style.display = "block";
+			}
+			//上一页按钮。原理同上。
+			aA[0].onclick = function(){
+				num--;
+				if(num<0){
+					num=3;
+				}
+				for(var i=0;i<Hyi.length;i++){
+					Hyi[i].style.display = "none";
+				}
+				Hyi[num].style.display = "block";	
+			}
+			//点击衣服，给模特换装。
+			for(var i=0;i<Hyi.length;i++){
+				//遍历衣柜里的衣服
+				Hyi[i].onclick = function(){
+					var index = this.title;
+					//定义index，获取衣服的索引
+					for(var x=0;x<Pyi.length;x++){//将所有衣服隐藏
+						Pyi[x].style.display= "none";	
+					}
+					for(var j=0;j<Pyi.length;j++){//显示当前点击衣服
+						Pyi[index].style.display= "block";	
+					}	
+				}	
+			}
+			
+			//分享模块的显示、隐藏
+			share.onmouseover = function(){
+				share.style.left=0;	
+			}
+			share.onmouseout = function(){
+				share.style.left=-155 + "px";	
+			}
+			
+			
+
+	
+		
+			
+			
+		</script>
+		
+		
+		
+		
+		
+		
+		
+		
+	</body>
+</html>
